@@ -38,6 +38,9 @@ $uzsu = decode_json($uzsu);
 
 fhem('delete wdt_uzsu_'.$device.'.*');
 
+# create new wdt's if UZSU is active only
+if ($uzsu->{active}) { 
+
 for(my $i=0; $i < @{$uzsu->{list}}; $i++) {
     $weekdays = $uzsu->{list}[$i]->{rrule};
     $weekdays = substr($weekdays,18,50);
@@ -134,6 +137,7 @@ for(my $i=0; $i < @{$uzsu->{list}}; $i++) {
     }
     }
     #fhem('save');   # use only if you want to save WDT settings immediately.
+}
 }
 }
 
